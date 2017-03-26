@@ -33,7 +33,7 @@ public class GenreStat extends JPanel{
     private PieDataset generateDataset()
     {
         // gather data
-        Map<String, Integer> genreFrequency = new HashMap<>();
+        Map<Object, Number> genreFrequency = new HashMap<>();
         for(String id : DriveManager.get().getSelected().values())
         {
             Movie mov = CachedOMDB.getMovie(id);
@@ -44,15 +44,18 @@ public class GenreStat extends JPanel{
                     genreFrequency.put(genre, 1);
                 }else
                 {
-                    genreFrequency.put(genre, genreFrequency.get(genre) + 1);
+                    genreFrequency.put(genre, genreFrequency.get(genre).doubleValue() + 1);
                 }
             }
         }
         
+        // trim
+        MapTrimmer.trim(genreFrequency, 0.01);
+        
         // convert to proper format
         DefaultPieDataset dataset = new DefaultPieDataset( );
-        for(Map.Entry<String, Integer> en : genreFrequency.entrySet())
-            dataset.setValue(en.getKey(), en.getValue());
+        for(Map.Entry<Object, Number> en : genreFrequency.entrySet())
+            dataset.setValue(en.getKey().toString(), en.getValue());
         
       return dataset;              
     }

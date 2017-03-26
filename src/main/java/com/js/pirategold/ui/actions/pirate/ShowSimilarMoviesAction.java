@@ -7,6 +7,8 @@ package com.js.pirategold.ui.actions.pirate;
 
 import com.js.pirategold.model.Drive;
 import com.js.pirategold.model.DriveManager;
+import com.js.pirategold.model.EigenValueSimilarMovieFinder;
+import com.js.pirategold.model.ISimilarMovieFinder;
 import com.js.pirategold.model.Movie;
 import com.js.pirategold.omdb.CachedOMDB;
 import com.js.pirategold.ui.MovieTableModel;
@@ -14,13 +16,7 @@ import com.js.pirategold.ui.UI;
 import com.js.pirategold.ui.actions.AbstractIconAction;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import javax.swing.JTable;
 
 /**
@@ -45,36 +41,14 @@ public class ShowSimilarMoviesAction extends AbstractIconAction{
         if (d.isEmpty()) {
             return;
         }
-        
-        
-        // naive algorithm for finding good recommendations
-        Set<String> knownMovies = new HashSet<>();
-        for(String imdbID : d.values())
-            knownMovies.add(imdbID);
-        Map<String,Integer> votes = new HashMap<>();
-        for(String imdbID : d.values())
-        {
-            Movie mov = CachedOMDB.getMovie(imdbID);
-            for(String similarImdbId : mov.getSimilar())
-            {
-                if(knownMovies.contains(similarImdbId))
-                    continue;
-                if(!votes.containsKey(similarImdbId))
-                    votes.put(similarImdbId, 1);
-                else
-                    votes.put(similarImdbId, votes.get(similarImdbId) + 1);
-            }
-        }
-        
-        // sort entries
-        List<Entry<String,Integer>> entries = new ArrayList<>(votes.entrySet());
-        java.util.Collections.sort(entries, (Entry<String, Integer> o1, Entry<String, Integer> o2) -> o1.getValue().compareTo(o2.getValue()));
-        
+       
+        ISimilarMovieFinder finder = new EigenValueSimilarMovieFinder();
+       
         // look them up
         List<Movie> movs = new ArrayList<>();
-        for(int i=entries.size()-1;i>=java.lang.Math.max(0, entries.size() - 20);i--)
+        for(String mov : finder.similar(d.values()))
         {
-            movs.add(CachedOMDB.getMovie(entries.get(i).getKey()));
+            movs.add(CachedOMDB.getMovie(mov));
         }
         
         JTable table = UI.get().getSimilarMoviesTable();

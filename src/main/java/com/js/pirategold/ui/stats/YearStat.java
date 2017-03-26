@@ -9,7 +9,10 @@ import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
 import com.js.pirategold.omdb.CachedOMDB;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import javax.swing.JPanel;
@@ -46,9 +49,17 @@ public class YearStat extends JPanel{
 
         }
 
+        List<Entry<Integer,Integer>> entries = new ArrayList<>(yearFrequency.entrySet());
+        java.util.Collections.sort(entries, new Comparator<Entry<Integer,Integer>>() {
+            @Override
+            public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2) {
+                return o1.getKey().compareTo(o2.getKey());
+            }
+        });        
+        
         // convert to proper format
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (Entry<Integer, Integer> en : yearFrequency.entrySet()) {
+        for (Entry<Integer, Integer> en : entries) {
             dataset.addValue(en.getValue(), "nof movies", en.getKey());
         }
 

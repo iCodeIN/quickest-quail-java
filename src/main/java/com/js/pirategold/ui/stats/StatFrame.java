@@ -25,18 +25,19 @@ public class StatFrame extends JFrame{
         tabs.add("Language", new LanguageStat());
         tabs.add("Year", new YearStat());
         tabs.add("Rating", new RatingStat());
+        tabs.add("Extension", new ExtensionStat());
         
         add(tabs, BorderLayout.CENTER);
         pack();
         
         // set position
         int width = getWidth();
-        int height = getHeight();
-        
+        int height = getHeight();        
         int centerX = parent.getX() + parent.getWidth()/2;
-        int centerY = parent.getY() + parent.getHeight()/2;
-        
+        int centerY = parent.getY() + parent.getHeight()/2;        
         setBounds(centerX - width/2, centerY - height/2, width, height);        
         
+        // copy icon
+        this.setIconImage(parent.getIconImage());
     }
 }

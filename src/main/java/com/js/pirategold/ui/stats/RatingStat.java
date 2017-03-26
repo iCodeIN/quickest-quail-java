@@ -9,8 +9,12 @@ import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
 import com.js.pirategold.omdb.CachedOMDB;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -35,8 +39,10 @@ public class RatingStat extends JPanel{
         Map<Double, Integer> ratingFrequency = new HashMap<>();
         for (String id : DriveManager.get().getSelected().values()) {
             Movie mov = CachedOMDB.getMovie(id);
-            double rating = mov.getImdbRating();
-
+            
+            int temp = ((int) (mov.getImdbRating() * 10));
+            double rating = (temp - temp % 5) / 10.0;
+            
             if (!ratingFrequency.containsKey(rating)) {
                 ratingFrequency.put(rating, 1);
             } else {
@@ -45,9 +51,18 @@ public class RatingStat extends JPanel{
 
         }
 
+        // sort
+        List<Entry<Double,Integer>> entries = new ArrayList<>(ratingFrequency.entrySet());
+        java.util.Collections.sort(entries, new Comparator<Entry<Double,Integer>>() {
+            @Override
+            public int compare(Entry<Double, Integer> o1, Entry<Double, Integer> o2) {
+                return o1.getKey().compareTo(o2.getKey());
+            }
+        });
+        
         // convert to proper format
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (Map.Entry<Double, Integer> en : ratingFrequency.entrySet()) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();        
+        for (Map.Entry<Double, Integer> en : entries) {
             dataset.addValue(en.getValue(), "nof movies", en.getKey());
         }
 
