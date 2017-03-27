@@ -63,7 +63,7 @@ public class GenreStat extends JPanel{
     private JFreeChart generateChart()
     {
         JFreeChart chart = ChartFactory.createPieChart(      
-         "Nof movies per genre",     // chart title 
+         java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.genre.title"),     // chart title 
          generateDataset(),         // data    
          true,                      // include legend   
          true, 

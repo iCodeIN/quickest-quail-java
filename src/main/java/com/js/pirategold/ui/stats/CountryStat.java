@@ -64,7 +64,7 @@ public class CountryStat extends JPanel{
     private JFreeChart generateChart()
     {
         JFreeChart chart = ChartFactory.createPieChart(      
-         "Nof movies per country",     // chart title 
+         java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.country.title"),     // chart title 
          generateDataset(),         // data    
          true,                      // include legend   
          true, 

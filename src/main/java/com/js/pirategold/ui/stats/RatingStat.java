@@ -63,7 +63,7 @@ public class RatingStat extends JPanel{
         // convert to proper format
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();        
         for (Map.Entry<Double, Integer> en : entries) {
-            dataset.addValue(en.getValue(), "nof movies", en.getKey());
+            dataset.addValue(en.getValue(), java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.rating.xaxis"), en.getKey());
         }
 
         // return
@@ -73,9 +73,9 @@ public class RatingStat extends JPanel{
     private JFreeChart generateChart()
     {
          JFreeChart lineChart = ChartFactory.createLineChart(
-            "Nof movies per rating",
-            "Rating",
-            "Number of Movies",
+            java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.rating.title"),
+            java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.rating.xaxis"),
+            java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.rating.yaxis"),
             generateDataset(),
             PlotOrientation.VERTICAL,
             true,

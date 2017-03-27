@@ -57,7 +57,7 @@ public class LanguageStat extends JPanel{
 
     private JFreeChart generateChart() {
         JFreeChart chart = ChartFactory.createPieChart(
-                "Nof movies per language", // chart title 
+                java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.language.title"), // chart title 
                 generateDataset(), // data    
                 true, // include legend   
                 true,

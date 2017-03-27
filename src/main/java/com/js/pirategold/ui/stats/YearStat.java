@@ -60,7 +60,7 @@ public class YearStat extends JPanel{
         // convert to proper format
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Entry<Integer, Integer> en : entries) {
-            dataset.addValue(en.getValue(), "nof movies", en.getKey());
+            dataset.addValue(en.getValue(), java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.year.xaxis"), en.getKey());
         }
 
         // return
@@ -70,9 +70,9 @@ public class YearStat extends JPanel{
     private JFreeChart generateChart()
     {
          JFreeChart lineChart = ChartFactory.createLineChart(
-            "Nof movies per year",
-            "Years",
-            "Number of Movies",
+            java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.year.title"),
+            java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.year.xaxis"),
+            java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.year.yaxis"),
             generateDataset(),
             PlotOrientation.VERTICAL,
             true,

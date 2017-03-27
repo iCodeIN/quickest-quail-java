@@ -20,11 +20,9 @@ public class JProgressDialog extends javax.swing.JDialog {
         
         // center this dialog (relative to its parent)
         int width = getWidth();
-        int height = getHeight();
-        
+        int height = getHeight();        
         int centerX = parent.getX() + parent.getWidth()/2;
-        int centerY = parent.getY() + parent.getHeight()/2;
-        
+        int centerY = parent.getY() + parent.getHeight()/2;        
         setBounds(centerX - width/2, centerY - height/2, width, height);
     }
 

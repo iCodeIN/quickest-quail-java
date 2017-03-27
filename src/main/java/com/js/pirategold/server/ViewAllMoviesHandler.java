@@ -5,7 +5,6 @@
  */
 package com.js.pirategold.server;
 
-import com.js.pirategold.model.Drive;
 import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
 import com.js.pirategold.omdb.CachedOMDB;

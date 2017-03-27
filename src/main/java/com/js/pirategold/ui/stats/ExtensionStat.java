@@ -6,8 +6,6 @@
 package com.js.pirategold.ui.stats;
 
 import com.js.pirategold.model.DriveManager;
-import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.util.HashMap;
@@ -60,7 +58,7 @@ public class ExtensionStat extends JPanel {
 
     private JFreeChart generateChart() {
         JFreeChart chart = ChartFactory.createPieChart(
-                "Nof movies per format", // chart title 
+                java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.extension.title"), // chart title 
                 generateDataset(), // data    
                 true, // include legend   
                 true,

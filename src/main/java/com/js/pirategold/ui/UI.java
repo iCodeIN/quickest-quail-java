@@ -57,7 +57,7 @@ public class UI extends JXFrame{
         
         // taskpane related to "drive"
         JXTaskPane drivePane = new JXTaskPane();    
-        drivePane.setTitle("Drive");
+        drivePane.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive"));
         drivePane.add(new AddDriveAction());
         drivePane.add(new RemoveDriveAction());
         drivePane.add(new ScanDriveAction());
@@ -67,7 +67,7 @@ public class UI extends JXFrame{
         
         // taskpane related to IO
         JXTaskPane ioPane = new JXTaskPane();
-        ioPane.setTitle("Export");
+        ioPane.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("export"));
         ioPane.add(new ExportToPDFAction());
         ioPane.add(new ExportToTXTAction());      
         ioPane.add(new ExportToXMLAction());    
@@ -75,14 +75,14 @@ public class UI extends JXFrame{
         
         // taskpane related to "less than legal" activities
         JXTaskPane piratePane = new JXTaskPane();
-        piratePane.setTitle("Pirate");
+        piratePane.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("pirate"));
         piratePane.add(new ShowSimilarMoviesAction());
         piratePane.add(new DownloadSimilarMoviesAction());      
         taskPaneContainer.add(piratePane);
         
         // taskpane related to "server"
         JXTaskPane serverPane = new JXTaskPane();
-        serverPane.setTitle("Server");
+        serverPane.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("server"));
         serverPane.add(new ToggleServerAction());     
         taskPaneContainer.add(serverPane);  
         

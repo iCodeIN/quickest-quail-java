@@ -20,12 +20,12 @@ public class StatFrame extends JFrame{
         setLayout(new BorderLayout());
         
         JTabbedPane tabs = new JTabbedPane();
-        tabs.add("Genre", new GenreStat());
-        tabs.add("Country", new CountryStat());
-        tabs.add("Language", new LanguageStat());
-        tabs.add("Year", new YearStat());
-        tabs.add("Rating", new RatingStat());
-        tabs.add("Extension", new ExtensionStat());
+        tabs.add(java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.genre"), new GenreStat());
+        tabs.add(java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.country"), new CountryStat());
+        tabs.add(java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.language"), new LanguageStat());
+        tabs.add(java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.year"), new YearStat());
+        tabs.add(java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.rating"), new RatingStat());
+        tabs.add(java.util.ResourceBundle.getBundle("i18n/i18n").getString("stat.extension"), new ExtensionStat());
         
         add(tabs, BorderLayout.CENTER);
         pack();
