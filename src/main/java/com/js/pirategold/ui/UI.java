@@ -95,13 +95,13 @@ public class UI extends JXFrame{
         
         // tabs
         JTabbedPane tabs = new JTabbedPane();             
-        tabs.add("Drive", driveMovieTable);
-        tabs.add("Similar", new JScrollPane(similarMovieTable));
+        tabs.add(java.util.ResourceBundle.getBundle("i18n/i18n").getString("tabs.drive"), driveMovieTable);
+        tabs.add(java.util.ResourceBundle.getBundle("i18n/i18n").getString("tabs.similar"), new JScrollPane(similarMovieTable));
         
         add(tabs);
         
         // finishing touches
-        setTitle("PirateGold");        
+        setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("name"));        
         pack();        
     }
     

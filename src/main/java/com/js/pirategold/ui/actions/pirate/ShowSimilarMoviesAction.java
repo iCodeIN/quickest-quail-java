@@ -42,6 +42,8 @@ public class ShowSimilarMoviesAction extends AbstractIconAction{
             return;
         }
        
+        
+        // Eigenvalue implementation of ISimilarMovieFinder
         ISimilarMovieFinder finder = new EigenValueSimilarMovieFinder();
        
         // look them up
@@ -51,6 +53,7 @@ public class ShowSimilarMoviesAction extends AbstractIconAction{
             movs.add(CachedOMDB.getMovie(mov));
         }
         
+        // set TableModel
         JTable table = UI.get().getSimilarMoviesTable();
         table.setModel(new MovieTableModel(movs));
         

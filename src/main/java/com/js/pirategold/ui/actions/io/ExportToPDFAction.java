@@ -86,7 +86,7 @@ public class ExportToPDFAction extends AbstractIconAction {
         // progress dialog
         JProgressDialog dialog = new JProgressDialog(UI.get(), false);
         dialog.setMaximum(DriveManager.get().getSelected().size());
-        dialog.setTitle("Export to PDF");
+        dialog.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("export.pdf"));
         dialog.setVisible(true);
 
         // run this in a new Thread
@@ -113,7 +113,7 @@ public class ExportToPDFAction extends AbstractIconAction {
                         Movie mov = CachedOMDB.getMovie(en.getValue());
 
                         // update progress dialog
-                        dialog.setText("Processing '" + mov.getTitle() + "'");
+                        dialog.setText(mov.getTitle());
                         dialog.setProgress(nrOfMovies);
 
                         // add table

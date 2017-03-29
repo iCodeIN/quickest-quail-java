@@ -43,4 +43,11 @@
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-jar-with-dependencies</actionName>
+            <displayName>jar-with-dependencies</displayName>
+            <goals>
+                <goal>jar-with-dependencies</goal>
+            </goals>
+        </action>
     </actions>

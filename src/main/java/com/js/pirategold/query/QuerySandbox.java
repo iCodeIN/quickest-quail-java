@@ -21,7 +21,7 @@ public class QuerySandbox {
  
     public static void main(String[] args)
     {
-        List<Tokenizer.Token> tokens = Tokenizer.tokenize("(metascore/10)*imdbrating >= 25");
+        List<Tokenizer.Token> tokens = Tokenizer.tokenize("(metascore/10) * imdbrating >= 25 AND year >= 2010 AND language contains \"English\"");
         tokens = Postfix.toPostfix(tokens);
         
         for(int i=0;i<tokens.size();i++)
@@ -36,7 +36,9 @@ public class QuerySandbox {
         vars.put("country", mov.getCountry());
         vars.put("metascore", mov.getMetaScore());
         vars.put("imdbrating", mov.getImdbRating());
-                
+        vars.put("year", mov.getYear());
+        vars.put("language", mov.getLanguage());
+        
         System.out.println(Evaluator.evaluate(ast, vars));
         
         Graph g = ASTVisualizer.buildGraph(ast);

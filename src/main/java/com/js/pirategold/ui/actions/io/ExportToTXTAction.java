@@ -70,7 +70,7 @@ public class ExportToTXTAction extends AbstractIconAction {
         // progress dialog
         JProgressDialog dialog = new JProgressDialog(UI.get(), false);
         dialog.setMaximum(DriveManager.get().getSelected().size());
-        dialog.setTitle("Export to TXT");
+        dialog.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("export.txt"));
         dialog.setVisible(true);
 
         // run export in new thread
@@ -95,7 +95,7 @@ public class ExportToTXTAction extends AbstractIconAction {
                         Movie mov = CachedOMDB.getMovie(en.getValue());
 
                         // update progress dialog
-                        dialog.setText("Processing '" + mov.getTitle() + "'");
+                        dialog.setText(mov.getTitle());
                         dialog.setProgress(nofMovies);                        
                         
                         fw.write(pad("Title", pad) + " : " + mov.getTitle() + "\n");

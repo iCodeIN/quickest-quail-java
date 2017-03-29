@@ -42,7 +42,7 @@ public class ScanDriveAction extends AbstractIconAction{
         String selectedPath = (String) JOptionPane.showInputDialog(
                                         null,
                                         "Select a drive:",
-                                        "PirateGold",
+                                        java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.scan"),
                                         JOptionPane.PLAIN_MESSAGE,
                                         null,
                                         options,

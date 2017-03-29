@@ -56,7 +56,7 @@ public class AddDriveAction extends AbstractIconAction {
                 // show error dialog
                 JOptionPane.showMessageDialog(UI.get(),
                         java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.drivealreadyadded"),
-                        "PirateGold",
+                        java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.add"),
                         JOptionPane.WARNING_MESSAGE);
                 // return
                 return;
@@ -65,7 +65,7 @@ public class AddDriveAction extends AbstractIconAction {
                 // show error dialog
                 JOptionPane.showMessageDialog(UI.get(),
                         java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.drivehasregisteredparent"),
-                        "PirateGold",
+                        java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.add"),
                         JOptionPane.WARNING_MESSAGE);
                 // return
                 return;
@@ -75,7 +75,7 @@ public class AddDriveAction extends AbstractIconAction {
         // progress dialog
         JProgressDialog dialog = new JProgressDialog(UI.get(), false);
         dialog.setIndeterminate(true);
-        dialog.setTitle("Add Drive");
+        dialog.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.add"));
         dialog.setVisible(true);
         
         // run in separate thread

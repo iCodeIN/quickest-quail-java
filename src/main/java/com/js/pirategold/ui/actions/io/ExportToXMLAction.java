@@ -68,7 +68,7 @@ public class ExportToXMLAction extends AbstractIconAction {
         // progress dialog
         JProgressDialog dialog = new JProgressDialog(UI.get(), false);
         dialog.setMaximum(DriveManager.get().getSelected().size());
-        dialog.setTitle("Export to XML");
+        dialog.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("export.xml"));
         dialog.setVisible(true);
         
         // process in new thread
@@ -93,7 +93,7 @@ public class ExportToXMLAction extends AbstractIconAction {
                         Movie mov = CachedOMDB.getMovie(en.getValue());
 
                         // update progress dialog
-                        dialog.setText("Processing '" + mov.getTitle() + "'");
+                        dialog.setText(mov.getTitle());
                         dialog.setProgress(nofMovies);                         
                         
                         Element movieElement = new Element("movie");
