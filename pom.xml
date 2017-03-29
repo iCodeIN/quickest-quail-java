@@ -36,6 +36,11 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.js.pirategold.main.UIMain</mainClass>
+                        </manifest>
+                    </archive>                    
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
