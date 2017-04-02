@@ -55,7 +55,7 @@ public class AddDriveAction extends AbstractIconAction {
             if (d.getRoot().equals(dir)) {
                 // show error dialog
                 JOptionPane.showMessageDialog(UI.get(),
-                        java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.drivealreadyadded"),
+                        java.util.ResourceBundle.getBundle("i18n/i18n").getString("dialog.drivealreadyadded"),
                         java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.add"),
                         JOptionPane.WARNING_MESSAGE);
                 // return
@@ -64,7 +64,7 @@ public class AddDriveAction extends AbstractIconAction {
             if (isParentFile(d.getRoot(), dir)) {
                 // show error dialog
                 JOptionPane.showMessageDialog(UI.get(),
-                        java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.drivehasregisteredparent"),
+                        java.util.ResourceBundle.getBundle("i18n/i18n").getString("dialog.drivehasregisteredparent"),
                         java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.add"),
                         JOptionPane.WARNING_MESSAGE);
                 // return
@@ -76,6 +76,7 @@ public class AddDriveAction extends AbstractIconAction {
         JProgressDialog dialog = new JProgressDialog(UI.get(), false);
         dialog.setIndeterminate(true);
         dialog.setTitle(java.util.ResourceBundle.getBundle("i18n/i18n").getString("drive.add"));
+        dialog.setText("");
         dialog.setVisible(true);
         
         // run in separate thread

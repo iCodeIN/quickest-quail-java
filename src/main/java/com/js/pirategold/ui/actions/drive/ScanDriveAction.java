@@ -65,7 +65,9 @@ public class ScanDriveAction extends AbstractIconAction{
         JProgressDialog dialog = new JProgressDialog(UI.get(), false);
         dialog.setIndeterminate(true);
         dialog.setTitle("Scan Drive");
+        dialog.setText("");
         dialog.setVisible(true);        
+
         
         final Drive selectedDrive = tempDrive;
         new Thread()
@@ -73,8 +75,7 @@ public class ScanDriveAction extends AbstractIconAction{
             @Override
             public void run()        
             {
-                selectedDrive.rescan();
-                DriveManager.get().actionPerformed();
+                selectedDrive.rescan();               
                 dialog.setVisible(false);
             }
         }.start();

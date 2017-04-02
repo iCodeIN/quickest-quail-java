@@ -5,6 +5,8 @@
  */
 package com.js.pirategold.model;
 
+import com.js.pirategold.model.event.DefaultActionModel;
+import com.js.pirategold.model.event.IActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -25,12 +27,34 @@ import org.json.JSONObject;
  *
  * @author joris
  */
-public class DriveManager extends ActionModel{
 
+public class DriveManager extends DefaultActionModel{
+
+    public static class DriveAddedEvent implements IActionEvent
+    {        
+        private Drive drive;
+        public DriveAddedEvent(Drive d){this.drive = d;}
+        public Drive getDrive() { return drive; }
+    }
+    
+    public static class DriveRemovedEvent implements IActionEvent
+    {  
+        private Drive drive;
+        public DriveRemovedEvent(Drive d){this.drive = d;}
+        public Drive getDrive() { return drive; }        
+    }
+    
+    public static class DriveSwitchedEvent implements IActionEvent
+    {  
+        private Drive drive;
+        public DriveSwitchedEvent(Drive d){this.drive = d;}
+        public Drive getDrive() { return drive; }        
+    }    
+    
     private static final DriveManager self = new DriveManager();
     private final List<Drive> drives = new ArrayList<>();
     private int selectedIndex;
-
+      
     private DriveManager() {
         load();
     }
@@ -38,20 +62,8 @@ public class DriveManager extends ActionModel{
     public static DriveManager get() {
         return self;
     }
-
-    private void loadInThread()
-    {
-        new Thread()
-        {
-            @Override
-            public void run()
-            {
-                load();
-            }
-        }.start();
-    }
-    
-    private void load() {
+       
+    public void load() {
         
         File rootDir = new File(System.getProperty("user.home"), "pirategold");
         File sourceFile = new File(rootDir, "drives.json");
@@ -91,7 +103,7 @@ public class DriveManager extends ActionModel{
         }
     }
 
-    private void storeInThread() {
+    public void storeInThread() {
         new Thread() {
             @Override
             public void run() {
@@ -100,7 +112,15 @@ public class DriveManager extends ActionModel{
         }.start();
     }
 
-    private void store() {
+    public void printDebug()
+    {
+        for(Drive d : drives)
+        {
+            System.out.println(d.getRoot() + "\t" + d.size());
+        }
+    }
+    
+    public void store() {
         // build object to persist
         JSONArray arr = new JSONArray();
         for (Drive d : drives) {
@@ -130,17 +150,17 @@ public class DriveManager extends ActionModel{
 
     public void add(Drive d) {
         drives.add(d);
-        actionPerformed();
-        storeInThread();
+        actionPerformed(new DriveAddedEvent(d));
     }
 
     public void remove(Drive d) {
         if(selectedIndex != -1 && d != null && drives.get(selectedIndex).getRoot().equals(d.getRoot()))
         {
             selectedIndex = -1;
+            actionPerformed(new DriveSwitchedEvent(null));
         }
         drives.remove(d);        
-        actionPerformed();
+        actionPerformed(new DriveRemovedEvent(d));
         storeInThread();
     }
 
@@ -149,10 +169,10 @@ public class DriveManager extends ActionModel{
     }
 
     public void setSelected(Drive d) {
-        for (int i = 0; i < drives.size(); i++) {
+        for (int i = 0; i < drives.size(); i++) {            
             if (drives.get(i).getRoot().equals(d.getRoot())) {
                 selectedIndex = i;
-                actionPerformed();
+                actionPerformed(new DriveSwitchedEvent(d));
                 break;
             }
         }

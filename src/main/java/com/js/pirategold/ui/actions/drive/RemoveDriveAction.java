@@ -51,7 +51,9 @@ public class RemoveDriveAction extends AbstractIconAction {
         
         // remove all info about selected drive
         if(driveToRemove != null)
+        {
             DriveManager.get().remove(driveToRemove);    
+        }
         
     }
 

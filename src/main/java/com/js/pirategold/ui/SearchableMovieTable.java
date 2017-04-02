@@ -12,6 +12,7 @@ import com.js.pirategold.query.AbstractSyntaxTree.AbstractSyntaxTreeNode;
 import com.js.pirategold.query.Evaluator;
 import com.js.pirategold.query.Postfix;
 import com.js.pirategold.query.Tokenizer;
+import com.js.pirategold.ui.actions.popup.MovieTablePopUpMenu;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -43,6 +44,7 @@ public class SearchableMovieTable extends JPanel{
         table = new JTable();
         table.setModel(new MovieTableModel());
         table.setAutoCreateRowSorter(true);
+        new MovieTablePopUpMenu(table);
         
         textField = new JTextField();
         

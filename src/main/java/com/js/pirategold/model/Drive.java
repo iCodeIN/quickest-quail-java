@@ -5,6 +5,10 @@
  */
 package com.js.pirategold.model;
 
+import com.js.pirategold.model.event.DefaultActionModel;
+import com.js.pirategold.model.event.IActionEvent;
+import com.js.pirategold.model.event.IActionModel;
+import com.js.pirategold.model.event.IActionModelListener;
 import com.js.pirategold.omdb.DefaultFileHandler;
 import java.io.File;
 import java.util.HashMap;
@@ -15,11 +19,20 @@ import java.util.Set;
  *
  * @author joris
  */
-public class Drive extends HashMap<File,String>{
+
+public class Drive extends HashMap<File,String> implements IActionModel{
+
+    public static class MovieRemovedEvent implements IActionEvent
+    {
+        private Movie movie;
+        public MovieRemovedEvent(Movie mov){this.movie = mov;}
+        public Movie getMovie() { return movie; }
+    }
     
     private final File root;
     private final String[] MEDIA_EXTENSIONS = {"avi","mp4","mpeg4","flv","mkv","mov","wmv","ogv","ogg","yuv","m4v"};
-
+    private DefaultActionModel actionModel = new DefaultActionModel();
+    
     public Drive(File root)
     {
         this(root, true);
@@ -83,6 +96,32 @@ public class Drive extends HashMap<File,String>{
     }
 
     public void rescan() {
-        explore(root, keySet());        
+        Set<File> alreadyDone = new HashSet<>(keySet());
+        explore(root, alreadyDone);        
+    }
+
+    @Override
+    public void addListener(IActionModelListener listener) {
+        actionModel.addListener(listener);
+    }
+
+    @Override
+    public void addListener(IActionModelListener listener, Class eventType) {
+        actionModel.addListener(listener, eventType);
+    }
+
+    @Override
+    public void removeListener(IActionModelListener listener) {
+        actionModel.removeListener(listener);
+    }
+
+    @Override
+    public void removeListener(IActionModelListener listener, Class eventType) {
+        actionModel.removeListener(listener, eventType);
+    }
+
+    @Override
+    public void actionPerformed(IActionEvent event) {
+        actionModel.actionPerformed(event);
     }
 }

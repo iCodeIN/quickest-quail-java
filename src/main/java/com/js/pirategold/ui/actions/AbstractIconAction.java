@@ -25,7 +25,10 @@ public abstract class AbstractIconAction extends AbstractAction{
         
         Icon ico = loadIcon(iconPath);
         if(ico != null)
+        {
             super.putValue(Action.LARGE_ICON_KEY, ico);
+            super.putValue(Action.SMALL_ICON, ico);
+        }
     }
 
     private Icon loadIcon(String path)

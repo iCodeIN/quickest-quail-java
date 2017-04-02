@@ -101,6 +101,11 @@ public class MovieTableModel extends DefaultTableModel{
        return null;
     }
 
+    public void removeMovie(Movie mov)
+    {
+        movies.remove(mov);
+    }
+    
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {     
     }
@@ -113,6 +118,12 @@ public class MovieTableModel extends DefaultTableModel{
            s += (( i == 0 ? "" : ", ") + arr[i]);
        }
        return s;
+    }
+
+    public Movie getMovieAt(int rowIndex) {
+        if(rowIndex < 0 || rowIndex >= getRowCount())
+            return null;
+         return movies.get(rowIndex);
     }
     
 }
