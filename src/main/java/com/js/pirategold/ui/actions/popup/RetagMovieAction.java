@@ -7,8 +7,11 @@ package com.js.pirategold.ui.actions.popup;
 
 import com.js.pirategold.model.Movie;
 import com.js.pirategold.ui.MovieTableModel;
+import com.js.pirategold.ui.UI;
 import com.js.pirategold.ui.actions.AbstractIconAction;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -28,6 +31,27 @@ public class RetagMovieAction extends AbstractIconAction {
     public void actionPerformed(ActionEvent e) {
         int row = table.convertRowIndexToModel(table.getSelectedRow());
         Movie mov = ((MovieTableModel) table.getModel()).getMovieAt(row);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        // dialog
+        File toRemove = (File) mov.get("file");
+        String fileName = mov.containsKey("file") ? toRemove.getName() : "";        
+        int opt = JOptionPane.showConfirmDialog(
+                UI.get(), 
+                "Are you sure you want to re-tag this movie?\nTitle : " + mov.getTitle() + "\nFile : " + fileName + "", 
+                java.util.ResourceBundle.getBundle("i18n/i18n").getString("popup.delete"),
+                JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        if(opt != JOptionPane.YES_OPTION)
+            return;
+        
+        
+        JOptionPane.showInputDialog(table, 
+                "Enter the new IMDB-ID for this file:", 
+                java.util.ResourceBundle.getBundle("i18n/i18n").getString("popup.retag"), 
+                JOptionPane.INFORMATION_MESSAGE, 
+                null, 
+                null, 
+                mov.getImdbID());
+        
     }   
 }

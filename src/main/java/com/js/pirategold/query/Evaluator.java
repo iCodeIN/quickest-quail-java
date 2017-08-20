@@ -25,7 +25,9 @@ public class Evaluator {
         Object arg0 = evaluate(root.children.get(1), vars);
         Object arg1 = evaluate(root.children.get(0), vars);
         if (arg0 instanceof String && arg1 instanceof String) {
-            return ((String) arg0).contains((String) arg1);
+            String s0 = (String) arg0;
+            String s1 = (String) arg1;
+            return s0.toUpperCase().contains(s1.toUpperCase());
         }
         if (arg0 instanceof String[] && arg1 instanceof String) {
             for (String t : (String[]) arg0) {
