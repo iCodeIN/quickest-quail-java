@@ -1,8 +1,8 @@
-# pirategold
+# quickest quail
 
 ## about
 
-PirateGold is a utility program to manage movie-files. It allows the end-user to connect a hard drive to the computer running the program, and simply scan the drive for movie-files. 
+QuickestQuail is a utility program to manage movie-files. It allows the end-user to connect a hard drive to the computer running the program, and simply scan the drive for movie-files. 
 
 The program will automatically strip redundant information in the filename (e.g. "1080p", "[dutch version]", etc) and query OMDB. Once a drive has been scanned, all the recognized movies are displayed in a neat table format. 
 
