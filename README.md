@@ -63,7 +63,21 @@ This program allows the end-user to make statistics such as:
 
 ### exporting to pdf
 
+This program allows the end-user to export their movie collection to a PDF document using iText. The generated PDF contains movie posters, titles, year of release, rating, and short summaries.
+
 ### exporting to txt
 
 ### exporting to xml
 
+## short term goals
+* fluent interfaces
+
+## long term goals
+* rework search functionality using antlr
+
+## getting involved
+
+This is an open source project and we would love your help.
+
+If this is your first PR or you're not sure where to get started,
+say hi and a team member would be happy to mentor you.
