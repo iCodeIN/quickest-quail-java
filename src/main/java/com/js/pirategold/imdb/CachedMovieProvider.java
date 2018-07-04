@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.js.pirategold.omdb;
+package com.js.pirategold.imdb;
 
 import com.js.pirategold.model.Movie;
 import java.io.File;
@@ -22,14 +22,25 @@ import org.json.JSONObject;
  *
  * @author joris
  */
-public class CachedOMDB {
+public class CachedMovieProvider implements IMovieProvider{
 
     private static final Map<String, Movie> cache = new HashMap<>();
 
     private static final File rootDir = new File(System.getProperty("user.home"), "pirategold");
-    private static final File sourceDir = new File(rootDir, "omdb");
-    
-    public static Movie getMovie(String imdbID) {
+    private static final File sourceDir = new File(rootDir, "imdb");
+
+    private IMovieProvider movieProvider = new TMDB();
+
+    private CachedMovieProvider(){}
+
+    private static CachedMovieProvider self = new CachedMovieProvider();
+
+    public static CachedMovieProvider get(){ return self; }
+
+    @Override
+    public Movie getMovie(String query) { return null; }
+
+    public Movie getMovieByID(String imdbID) {
         if (!sourceDir.exists()) {
             sourceDir.mkdirs();
         }
@@ -42,7 +53,7 @@ public class CachedOMDB {
             return cache.get(imdbID);
         }
 
-        Movie mov = OMDB.getMovieByID(imdbID);
+        Movie mov = movieProvider.getMovieByID(imdbID);
         cache.put(imdbID, mov);
 
         storeMovie(mov);
@@ -69,7 +80,7 @@ public class CachedOMDB {
                 cache.put(mov.getImdbID(), mov);
 
             } catch (FileNotFoundException | JSONException ex ) {
-                Logger.getLogger(CachedOMDB.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CachedMovieProvider.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -98,12 +109,12 @@ public class CachedOMDB {
                     writer.flush();
                     writer.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(CachedOMDB.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CachedMovieProvider.class.getName()).log(Level.SEVERE, null, ex);
                 } finally {
                     try {
                         writer.close();
                     } catch (IOException ex) {
-                        Logger.getLogger(CachedOMDB.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(CachedMovieProvider.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }

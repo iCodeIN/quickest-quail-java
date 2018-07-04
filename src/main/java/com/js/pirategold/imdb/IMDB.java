@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.js.pirategold.omdb;
+package com.js.pirategold.imdb;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.js.pirategold.omdb;
+package com.js.pirategold.imdb;
 
 import com.js.pirategold.model.Movie;
 import java.io.IOException;
@@ -18,9 +18,10 @@ import org.json.JSONObject;
  *
  * @author joris
  */
-public class OMDB {
-    
-    public static Movie getMovie(String query)
+public class OMDB implements IMovieProvider{
+
+
+    public Movie getMovie(String query)
     {
         try {
             return _getMovie(query);
@@ -75,7 +76,7 @@ public class OMDB {
         return retval;
     }
     
-    public static Movie getMovieByID(String imdbID)
+    public Movie getMovieByID(String imdbID)
     {        
         try {
             return _getMovieByID(imdbID);

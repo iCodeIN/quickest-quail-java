@@ -20,7 +20,7 @@ import com.itextpdf.layout.renderer.DrawContext;
 import com.js.pirategold.model.Drive;
 import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import com.js.pirategold.ui.JProgressDialog;
 import com.js.pirategold.ui.UI;
 import com.js.pirategold.ui.actions.AbstractIconAction;
@@ -99,8 +99,8 @@ public class ExportToPDFAction extends AbstractIconAction {
                     java.util.Collections.sort(entries, new Comparator<Entry<File, String>>() {
                         @Override
                         public int compare(Entry<File, String> o1, Entry<File, String> o2) {
-                            Movie mov1 = CachedOMDB.getMovie(o1.getValue());
-                            Movie mov2 = CachedOMDB.getMovie(o2.getValue());
+                            Movie mov1 = CachedMovieProvider.get().getMovieByID(o1.getValue());
+                            Movie mov2 = CachedMovieProvider.get().getMovieByID(o2.getValue());
                             return mov1.getTitle().compareTo(mov2.getTitle());
                         }
                     });
@@ -110,7 +110,7 @@ public class ExportToPDFAction extends AbstractIconAction {
                     Document doc = new Document(pdf);
 
                     for (Entry<File, String> en : entries) {
-                        Movie mov = CachedOMDB.getMovie(en.getValue());
+                        Movie mov = CachedMovieProvider.get().getMovieByID(en.getValue());
 
                         // update progress dialog
                         dialog.setText(mov.getTitle());

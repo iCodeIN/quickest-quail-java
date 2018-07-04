@@ -6,7 +6,7 @@
 package com.js.pirategold.ui;
 
 import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import com.js.pirategold.query.AbstractSyntaxTree;
 import com.js.pirategold.query.AbstractSyntaxTree.AbstractSyntaxTreeNode;
 import com.js.pirategold.query.Evaluator;
@@ -96,7 +96,7 @@ class MyRowFilter extends RowFilter<MovieTableModel, Object>
     @Override
     public boolean include(Entry<? extends MovieTableModel, ? extends Object> entry) {
        String imdbId = entry.getStringValue(8);       
-       Movie mov = CachedOMDB.getMovie(imdbId);
+       Movie mov = CachedMovieProvider.get().getMovieByID(imdbId);
        
        // set variables
        Map<String,Object> vars = new HashMap<>();

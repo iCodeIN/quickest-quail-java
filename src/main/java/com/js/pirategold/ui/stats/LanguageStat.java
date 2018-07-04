@@ -7,7 +7,7 @@ package com.js.pirategold.ui.stats;
 
 import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,9 @@ public class LanguageStat extends JPanel{
         // gather data
         Map<Object, Number> languageFrequency = new HashMap<>();
         for (String id : DriveManager.get().getSelected().values()) {
-            Movie mov = CachedOMDB.getMovie(id);
+            Movie mov = CachedMovieProvider.get().getMovieByID(id);
+            if(mov.getLanguage() == null)
+                continue;
             for (String lang : mov.getLanguage()) {
                 if (!languageFrequency.containsKey(lang)) {
                     languageFrequency.put(lang, 1);

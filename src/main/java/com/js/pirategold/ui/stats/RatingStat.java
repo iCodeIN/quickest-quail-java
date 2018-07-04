@@ -7,7 +7,7 @@ package com.js.pirategold.ui.stats;
 
 import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -38,7 +38,7 @@ public class RatingStat extends JPanel{
     private CategoryDataset generateDataset() {
         Map<Double, Integer> ratingFrequency = new HashMap<>();
         for (String id : DriveManager.get().getSelected().values()) {
-            Movie mov = CachedOMDB.getMovie(id);
+            Movie mov = CachedMovieProvider.get().getMovieByID(id);
             
             int temp = ((int) (mov.getImdbRating() * 10));
             double rating = (temp - temp % 5) / 10.0;

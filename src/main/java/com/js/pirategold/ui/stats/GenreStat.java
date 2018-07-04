@@ -7,7 +7,7 @@ package com.js.pirategold.ui.stats;
 
 import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,9 @@ public class GenreStat extends JPanel{
         Map<Object, Number> genreFrequency = new HashMap<>();
         for(String id : DriveManager.get().getSelected().values())
         {
-            Movie mov = CachedOMDB.getMovie(id);
+            Movie mov = CachedMovieProvider.get().getMovieByID(id);
+            if(mov.getGenre() == null)
+                continue;
             for(String genre : mov.getGenre())
             {
                 if(!genreFrequency.containsKey(genre))

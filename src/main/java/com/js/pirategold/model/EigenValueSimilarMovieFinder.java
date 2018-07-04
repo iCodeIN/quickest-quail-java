@@ -5,7 +5,7 @@
  */
 package com.js.pirategold.model;
 
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -32,7 +32,7 @@ public class EigenValueSimilarMovieFinder implements ISimilarMovieFinder{
         for(String source : ids)
         {
             linkage.put(source, new HashSet<>());
-            Movie mov = CachedOMDB.getMovie(source);
+            Movie mov = CachedMovieProvider.get().getMovie(source);
             for(String target : mov.getSimilar())
             {
                 if(ids.contains(target))
@@ -75,7 +75,7 @@ public class EigenValueSimilarMovieFinder implements ISimilarMovieFinder{
         Map<String, Double> votes = new HashMap<>();
         for(String id : eigenvalues.keySet())
         {
-            Movie mov = CachedOMDB.getMovie(id);
+            Movie mov = CachedMovieProvider.get().getMovie(id);
             for(String rec : mov.getSimilar())
             if(!linkage.containsKey(rec))
             {

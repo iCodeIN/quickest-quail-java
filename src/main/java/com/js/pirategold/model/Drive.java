@@ -9,7 +9,7 @@ import com.js.pirategold.model.event.DefaultActionModel;
 import com.js.pirategold.model.event.IActionEvent;
 import com.js.pirategold.model.event.IActionModel;
 import com.js.pirategold.model.event.IActionModelListener;
-import com.js.pirategold.omdb.DefaultFileHandler;
+import com.js.pirategold.io.DefaultFileHandler;
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;

@@ -120,6 +120,8 @@ public class Movie extends HashMap<String, Object> {
     
     private String[] getAsStringArray(String propertyName)
     {
+        if(get(propertyName) instanceof String[])
+            return (String[]) get(propertyName);
         String[] parts = getAsString(propertyName).split(", ");
         java.util.Arrays.sort(parts);
         return parts;

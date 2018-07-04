@@ -7,7 +7,7 @@ package com.js.pirategold.server;
 
 import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.File;
@@ -46,7 +46,7 @@ public class ViewAllMoviesHandler implements HttpHandler{
         
         for(Entry<File,String> en : DriveManager.get().getSelected().entrySet())
         {
-            Movie mov = CachedOMDB.getMovie(en.getValue());
+            Movie mov = CachedMovieProvider.get().getMovieByID(en.getValue());
             
             Element movieElement = new Element("movie");
             

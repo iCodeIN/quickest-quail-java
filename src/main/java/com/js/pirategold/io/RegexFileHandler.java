@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.js.pirategold.omdb;
+package com.js.pirategold.io;
 
+import com.js.pirategold.imdb.IMovieProvider;
+import com.js.pirategold.imdb.OMDB;
+import com.js.pirategold.imdb.TMDB;
 import com.js.pirategold.model.Movie;
 import java.io.File;
 import java.util.regex.Matcher;
@@ -36,7 +39,9 @@ public class RegexFileHandler implements IFileHandler{
                                   {"(.*)\\.(.*)","{1} {2}"},                // remove .
                                   {"(.*)  (.*)","{1} {2}"}                  // remove <space><space>
                                  };
-    
+
+    private IMovieProvider movieProvider = new TMDB();
+
     @Override
     public Movie process(File f) {
         
@@ -75,7 +80,7 @@ public class RegexFileHandler implements IFileHandler{
             {
                 partialName += " " + parts[j];
             }
-            Movie mov = OMDB.getMovie(partialName);
+            Movie mov = movieProvider.getMovie(partialName);
             if(!mov.getImdbID().isEmpty())
                 return mov;
         }

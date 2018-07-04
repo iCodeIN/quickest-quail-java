@@ -6,7 +6,7 @@
 package com.js.pirategold.query;
 
 import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import com.js.pirategold.query.AbstractSyntaxTree.AbstractSyntaxTreeNode;
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +29,7 @@ public class QuerySandbox {
         
         AbstractSyntaxTreeNode ast = AbstractSyntaxTree.buildAST(tokens);
        
-        Movie mov = CachedOMDB.getMovie("tt2294629");
+        Movie mov = CachedMovieProvider.get().getMovie("tt2294629");
         
         Map<String, Object> vars = new HashMap<>();
         vars.put("genre", mov.getGenre());

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.js.pirategold.omdb;
+package com.js.pirategold.io;
 
 import com.js.pirategold.model.Movie;
 import java.io.File;

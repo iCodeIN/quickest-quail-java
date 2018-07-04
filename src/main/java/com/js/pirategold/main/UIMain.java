@@ -6,7 +6,7 @@
 package com.js.pirategold.main;
 
 import com.js.pirategold.model.DriveManager;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import com.js.pirategold.ui.UI;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -26,7 +26,7 @@ public class UIMain {
     public static void main(String[] args)
     {
         // load cache
-        CachedOMDB.preload();
+        CachedMovieProvider.preload();
         
         // set look and feel
         try {

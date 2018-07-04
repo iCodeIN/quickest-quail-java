@@ -10,7 +10,7 @@ import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.EigenValueSimilarMovieFinder;
 import com.js.pirategold.model.ISimilarMovieFinder;
 import com.js.pirategold.model.Movie;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import com.js.pirategold.ui.MovieTableModel;
 import com.js.pirategold.ui.UI;
 import com.js.pirategold.ui.actions.AbstractIconAction;
@@ -50,7 +50,7 @@ public class ShowSimilarMoviesAction extends AbstractIconAction{
         List<Movie> movs = new ArrayList<>();
         for(String mov : finder.similar(d.values()))
         {
-            movs.add(CachedOMDB.getMovie(mov));
+            movs.add(CachedMovieProvider.get().getMovieByID(mov));
         }
         
         // set TableModel

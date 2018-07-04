@@ -14,7 +14,7 @@ import com.js.pirategold.model.DriveManager.DriveSwitchedEvent;
 import com.js.pirategold.model.Movie;
 import com.js.pirategold.model.event.IActionEvent;
 import com.js.pirategold.model.event.IActionModelListener;
-import com.js.pirategold.omdb.CachedOMDB;
+import com.js.pirategold.imdb.CachedMovieProvider;
 import com.js.pirategold.ui.actions.drive.AddDriveAction;
 import com.js.pirategold.ui.actions.drive.RemoveDriveAction;
 import com.js.pirategold.ui.actions.drive.ScanDriveAction;
@@ -31,10 +31,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -160,7 +158,7 @@ class UIActionModelListener implements IActionModelListener {
         if (d != null) {            
             for (Entry<File, String> en : d.entrySet()) {
                 Movie mov = new Movie();
-                mov.putAll(CachedOMDB.getMovie(en.getValue()));
+                mov.putAll(CachedMovieProvider.get().getMovieByID(en.getValue()));
                 mov.put("file", en.getKey());                
                 movs.add(mov);
             }
