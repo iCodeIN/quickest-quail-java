@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PirateGold" />
+        <module name="Quickest-Quail" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PirateGold" target="1.8" />
+      <module name="Quickest-Quail" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
