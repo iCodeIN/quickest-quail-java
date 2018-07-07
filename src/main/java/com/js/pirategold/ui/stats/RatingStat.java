@@ -8,7 +8,8 @@ package com.js.pirategold.ui.stats;
 import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
 import com.js.pirategold.imdb.CachedMovieProvider;
-import java.awt.BorderLayout;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -81,6 +82,8 @@ public class RatingStat extends JPanel{
             true,
             true,
             false);
+        lineChart.setBackgroundPaint(new Color(0xFF, 0xFF, 0xFF, 0));
+        lineChart.getPlot().setBackgroundPaint(Color.WHITE);
          return lineChart;        
     }   
 }

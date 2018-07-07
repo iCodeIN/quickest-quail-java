@@ -8,7 +8,8 @@ package com.js.pirategold.ui.stats;
 import com.js.pirategold.model.DriveManager;
 import com.js.pirategold.model.Movie;
 import com.js.pirategold.imdb.CachedMovieProvider;
-import java.awt.BorderLayout;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JPanel;
@@ -70,6 +71,8 @@ public class GenreStat extends JPanel{
          true,                      // include legend   
          true, 
          false);
+        chart.setBackgroundPaint(new Color(0xFF, 0xFF, 0xFF, 0));
+        chart.getPlot().setBackgroundPaint(Color.WHITE);
       return chart;        
     }    
 }

@@ -6,7 +6,8 @@
 package com.js.pirategold.ui.stats;
 
 import com.js.pirategold.model.DriveManager;
-import java.awt.BorderLayout;
+
+import java.awt.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +64,8 @@ public class ExtensionStat extends JPanel {
                 true, // include legend   
                 true,
                 false);
+        chart.setBackgroundPaint(new Color(0xFF, 0xFF, 0xFF, 0));
+        chart.getPlot().setBackgroundPaint(Color.WHITE);
         return chart;
     }
 

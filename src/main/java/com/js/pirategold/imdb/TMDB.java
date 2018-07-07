@@ -7,10 +7,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -89,7 +86,7 @@ public class TMDB implements IMovieProvider {
     }
 
     private Movie getMovieByTMDBID(String tmdbID) throws IOException {
-        String url = "https://api.themoviedb.org/3/movie/" + tmdbID + "?api_key=" + API_KEY + "&language=en-US";
+        String url = "https://api.themoviedb.org/3/movie/" + tmdbID + "?api_key=" + API_KEY + "&language=en-US&append_to_response=credits";
 
         // lookup
         Scanner sc = new Scanner(new URL(url).openStream());
@@ -113,15 +110,58 @@ public class TMDB implements IMovieProvider {
         retval.put("imdbRating", retval.get("vote_average"));
         retval.put("imdbVotes", retval.get("vote_count"));
 
-        String genreString = "";
+        // genres
+        List<String> genres = new ArrayList<>();
         for(HashMap genreMap : (List<HashMap>) retval.get("genres")){
-            genreString += genreMap.get("name").toString() + ", ";
+            genres.add(genreMap.get("name").toString());
         }
-        if(genreString.endsWith(", "))
-            genreString = genreString.substring(0, genreString.length() - 2);
-        retval.put("Genre", genreString);
+        retval.put("Genre", toArrayString(genres));
+
+        // actors
+        List<String> actors = new ArrayList<>();
+        for(Object tmp : (List) ((Map) retval.get("credits")).get("cast")){
+            Map tmpB = (Map) tmp;
+            actors.add(tmpB.get("name").toString());
+        }
+        retval.put("Actors", toArrayString(actors));
+
+        // directors
+        List<String> directors = new ArrayList<>();
+        for(Object tmp : (List) ((Map) retval.get("credits")).get("crew")){
+            Map tmpB = (Map) tmp;
+            if("Directing".equals(tmpB.get("department")))
+                directors.add(tmpB.get("name").toString());
+        }
+        retval.put("Director", toArrayString(directors));
+
+        // writers
+        List<String> writers = new ArrayList<>();
+        for(Object tmp : (List) ((Map) retval.get("credits")).get("crew")){
+            Map tmpB = (Map) tmp;
+            if("Writing".equals(tmpB.get("department")))
+                writers.add(tmpB.get("name").toString());
+        }
+        retval.put("Writer", toArrayString(writers));
+
+        // producers
+        List<String> producers = new ArrayList<>();
+        for(Object tmp : (List) ((Map) retval.get("credits")).get("crew")){
+            Map tmpB = (Map) tmp;
+            if("Production".equals(tmpB.get("department")))
+                producers.add(tmpB.get("name").toString());
+        }
+        retval.put("Producer", toArrayString(producers));
 
         // return
         return retval;
+    }
+
+    private String toArrayString(List<String> l) {
+        if(l.isEmpty())
+            return "";
+        String txt = "";
+        for(int i = 0 ;i < l.size() ; i++)
+            txt += (i == 0 ? "" : ", ") + l.get(i);
+        return txt;
     }
 }
